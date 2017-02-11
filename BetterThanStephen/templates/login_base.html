@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Team k">
+    <meta name="author" content="">
 
     {#    <link rel="icon" href="{% static "images/favicon.ico" %}">#}
 
@@ -21,14 +21,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-
             <a class="navbar-brand" href="{% url 'index' %}">Dankest App - Still Better Than Stephen</a>
         </div>
         <div class="navbar-collapse collapse">
@@ -59,7 +57,6 @@
                     <li><a href="{% url 'auth_logout' %}?next=/">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'auth_login' %}?next=/">Login</a></li>
-                    <li><a href="{% url 'registration_register' %}">Register Here </a></li>
                 {% endif %}
 
                 <li><a href="">About</a></li>
@@ -70,35 +67,12 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+    <div>
+        {% block body_block %}
 
-            {% block side_block %}
-                <h2>Sidebar</h2>
-{#                <p>#}
-{#                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque ante eu eros#}
-{#                    pharetra#}
-{#                    dignissim. Nam ut venenatis ipsum. In ligula dui, volutpat nec pulvinar at, condimentum eu lorem.#}
-{#                    Suspendisse ut interdum mi, vel hendrerit nunc. Sed lobortis magna vel mi dignissim, a efficitur dui#}
-{#                    dictum. Aliquam vulputate eleifend orci, in facilisis lectus vulputate nec. Nunc posuere#}
-{#                    sollicitudin nunc. Etiam vehicula a elit commodo malesuada. Cras egestas libero aliquet, mattis elit#}
-{#                    a, interdum purus. Vestibulum ullamcorper luctus magna.#}
-{#                </p>#}
-
-            {% endblock %}
-
-
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div>
-                {#               style="margin-top: 5%">#}
-                {% block body_block %}
-
-                {% endblock %}
-            </div>
-        </div>
+        {% endblock %}
     </div>
+
 </div>
 
 </body>
