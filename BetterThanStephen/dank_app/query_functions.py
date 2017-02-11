@@ -1,5 +1,10 @@
 from operator import itemgetter
 
+ACTION_1_NAME = "when is my next payment"
+ACTION_2_NAME = "how much do I owe"
+ACTION_3_NAME = "when is my last payment"
+ACTION_4_NAME = "how is my last payment"
+
 possible_keywords = {"thing": ["when", "how"],
                      "time": ["next", "last"],
                      "noun": ["payment", "owe"]
@@ -8,30 +13,30 @@ possible_keywords = {"thing": ["when", "how"],
 #mapping keyword to action dictionary ( like matrices )
 #if keyword exist in action, 1 else 0
 keyword_to_action_dictionary = {
-    "when": {"when is next payment": 1,
-             "how much i owe": 0,
-             "when is last payment": 1,
-             "how much is last payment": 0},
-    "how": {"when is next payment": 0,
-            "how much i owe": 1,
-            "when is last payment": 0,
-            "how much is last payment": 1},
-    "payment" : {"when is next payment" : 1,
-              "how much i owe" : 0,
-              "when is last payment": 1,
-              "how much is last payment": 1},
-    "owe" : {"when is next payment" : 0,
-             "how much i owe" : 1,
-             "when is last payment": 0,
-             "how much is last payment": 0},
-    "next": {"when is next payment" : 1,
-             "how much i owe" : 0,
-             "when is last payment": 0,
-             "how much is last payment": 0},
-    "last": {"when is next payment" : 0,
-             "how much i owe" : 0,
-             "when is last payment": 1,
-             "how much is last payment": 1}
+    "when": {ACTION_1_NAME: 1,
+             ACTION_2_NAME: 0,
+             ACTION_3_NAME: 1,
+             ACTION_4_NAME: 0},
+    "how": {ACTION_1_NAME: 0,
+            ACTION_2_NAME: 1,
+            ACTION_3_NAME: 0,
+            ACTION_4_NAME: 1},
+    "payment" : {ACTION_1_NAME : 1,
+              ACTION_2_NAME : 0,
+              ACTION_3_NAME: 1,
+              ACTION_4_NAME: 1},
+    "owe" : {ACTION_1_NAME : 0,
+             ACTION_2_NAME : 1,
+             ACTION_3_NAME: 0,
+             ACTION_4_NAME: 0},
+    "next": {ACTION_1_NAME : 1,
+             ACTION_2_NAME : 0,
+             ACTION_3_NAME: 0,
+             ACTION_4_NAME: 0},
+    "last": {ACTION_1_NAME : 0,
+             ACTION_2_NAME : 0,
+             ACTION_3_NAME: 1,
+             ACTION_4_NAME: 1}
 }
 
 #finding keywords in string
@@ -61,10 +66,10 @@ def query_db(keywords):
     # for the matched keywords in string, find which action the combination tends to go to
     for key in keywords:
         matched_keyword = keywords[key][0]
-        action_1_total = action_1_total + keyword_to_action_dictionary[matched_keyword]["when is next payment"]
-        action_2_total = action_2_total + keyword_to_action_dictionary[matched_keyword]["how much i owe"]
-        action_3_total = action_3_total + keyword_to_action_dictionary[matched_keyword]["when is last payment"]
-        action_4_total = action_4_total + keyword_to_action_dictionary[matched_keyword]["how much is last payment"]
+        action_1_total = action_1_total + keyword_to_action_dictionary[matched_keyword][ACTION_1_NAME]
+        action_2_total = action_2_total + keyword_to_action_dictionary[matched_keyword][ACTION_2_NAME]
+        action_3_total = action_3_total + keyword_to_action_dictionary[matched_keyword][ACTION_3_NAME]
+        action_4_total = action_4_total + keyword_to_action_dictionary[matched_keyword][ACTION_4_NAME]
 
     action_list = [["action 1", action_1_total],
                    ["action 2", action_2_total],
