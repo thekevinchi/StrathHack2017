@@ -1,4 +1,4 @@
-### joe made this: http://goel.io/joe
+git ### joe made this: http://goel.io/joe
 
 #####=== Android ===#####
 
@@ -53,3 +53,4 @@ tests/report/
 .idea*
 
 db.sqlite3
+/BetterThanStephen/dank_app/migrations/
