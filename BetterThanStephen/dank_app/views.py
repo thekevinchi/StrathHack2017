@@ -8,17 +8,14 @@ def index(request):
 
 def search(request):
     if request.method == 'GET':
+        print
         user = User.objects.get(username='bob')
         user_p = UserProfile.objects.get(user_account=user)
 
         query = request.GET.get('query', '')
         keywords = find_keywords(query)
         response = query_db(user_p, keywords)
-        
-        for payment in response:
-            print payment
 
-        # nathen will return a context dict
         context_dict = {"query": query,
                         "response": response}
         return render(request, 'dank_app/search.html', context_dict)
