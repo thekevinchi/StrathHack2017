@@ -14,6 +14,7 @@
     <title>Dank App - {% block title %}Home{% endblock %}</title>
 
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css">
 
 
     <!--[if lt IE 9]>
@@ -30,15 +31,35 @@
 
             <a class="navbar-brand" href="{% url 'index' %}">Dankest App - Still Better Than Stephen</a>
         </div>
-
         <div class="navbar-collapse collapse">
 
+            <form class="navbar-form navbar-left" id="user_form" method="post" action="{% url 'index' %}">
+                {% csrf_token %}
+
+                <input class="awesomplete form-control" type="text" id="awesome" name="query" value=""
+                       placeholder="Search..."/>
+
+                <script type="text/javascript"
+                        src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.min.js"></script>
+                <script src="{% static "js/autocomplete.js" %}"></script>
+                <script type="text/javascript">
+                    var input = document.getElementById("awesome");
+                    var awesomplete = new Awesomplete(input, {
+                        minChars: 2
+                    });
+                    awesomplete.list = word_list
+                </script>
+
+                <input class="btn btn-primary" type="submit" name="submit" value="Search"/>
+
+            </form>
+
             <ul class="nav navbar-nav navbar-right">
-{#                {% if user.is_authenticated %}#}
-{#                    <li><a href="{% url 'auth_logout' %}?next=/">Logout</a></li>#}
-{#                {% else %}#}
-{#                    <li><a href="{% url 'auth_login' %}?next=/">Login</a></li>#}
-{#                {% endif %}#}
+                {#                {% if user.is_authenticated %}#}
+                {#                    <li><a href="{% url 'auth_logout' %}?next=/">Logout</a></li>#}
+                {#                {% else %}#}
+                {#                    <li><a href="{% url 'auth_login' %}?next=/">Login</a></li>#}
+                {#                {% endif %}#}
 
                 <li><a href="">About</a></li>
             </ul>
@@ -48,29 +69,33 @@
 
 
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
 
             {% block side_block %}
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque ante eu eros
+                    pharetra
+                    dignissim. Nam ut venenatis ipsum. In ligula dui, volutpat nec pulvinar at, condimentum eu lorem.
+                    Suspendisse ut interdum mi, vel hendrerit nunc. Sed lobortis magna vel mi dignissim, a efficitur dui
+                    dictum. Aliquam vulputate eleifend orci, in facilisis lectus vulputate nec. Nunc posuere
+                    sollicitudin nunc. Etiam vehicula a elit commodo malesuada. Cras egestas libero aliquet, mattis elit
+                    a, interdum purus. Vestibulum ullamcorper luctus magna.
+                </p>
 
             {% endblock %}
 
 
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-            <div style="margin-top: 5%">
+            <div>
+                {#               style="margin-top: 5%">#}
                 {% block body_block %}
 
                 {% endblock %}
             </div>
         </div>
-
-
     </div>
 </div>
 
