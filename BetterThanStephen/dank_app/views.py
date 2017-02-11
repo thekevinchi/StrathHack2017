@@ -5,6 +5,7 @@ def index(request):
     return render(request, 'dank_app/index.html')
 
 
+
 def search(request):
     if request.method == 'GET':
         query = request.GET.get('query', '')
@@ -16,3 +17,7 @@ def search(request):
         return render(request, 'dank_app/search.html', context_dict)
     else:
         return HttpResponseRedirect('/')
+
+def speech(request):
+    return render(request, 'dank_app/speech-demo.html')
+
