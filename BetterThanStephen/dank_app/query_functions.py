@@ -1,55 +1,81 @@
-possible_keywords = {"thing": ["when", "how"],
+amount_list = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+
+possible_keywords = {"question": ["when", "how"],
                      "time": ["next", "last"],
-                     "noun": ["payment", "owe"]
+                     "noun": ["payment", "payments", "owe"],
+                     "amount": amount_list
                     }
-#possible_functions = ["when next payment", "how much next payment", ]
 
 def find_keywords(result_string):
-    keywords = {"thing" : [], "time" : [], "noun" : []}
+    keywords = {"question" : [], "time" : [], "noun" : [], "amount" : []}
     split_result = result_string.split(" ")
 
     for word in split_result:
-        if word in possible_keywords["thing"]:
-            keywords["thing"].append(word)
+        word.lower()
+        if word in possible_keywords["question"]:
+            keywords["question"].append(word)
         elif word in possible_keywords["time"]:
             keywords["time"].append(word)
         elif word in possible_keywords["noun"]:
-            keywords["noun"].append(word)
+            if word == "payments":
+                keywords["noun"].append("payment")
+            else:
+                keywords["noun"].append(word)
+        elif word in possible_keywords["amount"]:
+            keywords["amount"].append(word)
+
+    if len(keywords["amount"]) == 0:
+        keywords["amount"].append(1)
 
     print("split_result is: {0}".format(split_result))
 
     return keywords
 
 def query_db(keywords):
-    thing = keywords["thing"][0]
+    question = keywords["question"][0]
     time = keywords["time"][0]
     noun = keywords["noun"][0]
+    amountKeyword = keywords["amount"][0]
 
-    print("thing is: {0}".format(thing))
+    print("question is: {0}".format(question))
     print("time is: {0}".format(time))
     print("noun is: {0}".format(noun))
+    print("amount is: {0}".format(amountKeyword))
 
-    if thing == "when":
-        if time == "next":
-            if noun == "payment":
-                print(1)
-            elif noun == "owe":
-                print(2)
-        elif time == "last":
-            if noun == "payment":
-                print(3)
-            elif noun == "owe":
-                print(4)
-    elif thing == "how":
-        if time == "next":
-            if noun == "payment":
-                print(5)
-            elif noun == "owe":
-                print(6)
-        elif time == "last":
-            if noun == "payment":
-                print(7)
-            elif noun == "owe":
-                print(8)
-        
+    whenBoolean = False
+    paidBoolean = False
+    amount = 0
 
+    if question == "when":
+        whenBoolean = True
+
+    if time == "last":
+        paidBoolean = True
+
+    if amountKeyword in amount_list:
+        if amountKeyword in {"one", "1"}:
+            amount = 1
+        elif amountKeyword in {"two", "2"}:
+            amount = 2
+        elif amountKeyword in {"three", "3"}:
+            amount = 3
+        elif amountKeyword in {"four", "4"}:
+            amount = 4
+        elif amountKeyword in {"five", "5"}:
+            amount = 5
+        elif amountKeyword in {"six", "6"}:
+            amount = 6
+        elif amountKeyword in {"seven", "7"}:
+            amount = 7
+        elif amountKeyword in {"eight", "8"}:
+            amount = 8
+        elif amountKeyword in {"nine", "9"}:
+            amount = 9
+        elif amountKeyword in {"ten", "10"}:
+            amount = 10
+
+        print("real amount is: {0}".format(amount))
+    
+            
+    
+    
