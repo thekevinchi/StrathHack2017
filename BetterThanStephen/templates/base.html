@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Team k">
+
+    {#    <link rel="icon" href="{% static "images/favicon.ico" %}">#}
+
+    <title>Dank App - {% block title %}Home{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}" media="screen"/>
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="{% url 'index' %}">Dankest App - Still Better Than Stephen</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav navbar-right">
+{#                {% if user.is_authenticated %}#}
+{#                    <li><a href="{% url 'auth_logout' %}?next=/">Logout</a></li>#}
+{#                {% else %}#}
+{#                    <li><a href="{% url 'auth_login' %}?next=/">Login</a></li>#}
+{#                {% endif %}#}
+
+                <li><a href="">About</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+
+            {% block side_block %}
+
+            {% endblock %}
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            <div style="margin-top: 5%">
+                {% block body_block %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>
