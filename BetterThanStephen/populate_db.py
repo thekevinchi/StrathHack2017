@@ -83,17 +83,17 @@ def populate():
                 amount=1500)
 
 
-def add_user(name, username, password, email, dob, last_name="testuser"):
+def add_user(name, username, password, email, dob, last_name="testuser", status="waiting payment"):
     user = User.objects.create_user(first_name=name, last_name=last_name,
                                     username=username, email=email,
                                     password=password)
-    u = UserProfile.objects.get_or_create(user=user, dateOfBirth=dob)[0]
+    u = UserProfile.objects.get_or_create(user_account=user, dateOfBirth=dob, status=status)[0]
     u.save()
     return u
 
 
 def add_payment(user, payed=False, due_date=datetime(2017, 12, 31, 10), amount=100):
-    payment = Payments.objects.get_or_create(user_profile=user, payed=payed, due_date=due_date, amount=amount)[0]
+    payment = Payments.objects.get_or_create(user=user, paid=payed, due_date=due_date, amount=amount)[0]
     payment.save()
     # return payment
 
