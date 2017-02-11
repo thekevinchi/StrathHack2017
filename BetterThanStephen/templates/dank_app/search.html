@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body_block %}
+    {% if query and responce %}
+
+        Search for : {{ query }}    <br/>
+        Response   : {{ responce }} <br/>
+
+    {% endif %}
+{% endblock %}

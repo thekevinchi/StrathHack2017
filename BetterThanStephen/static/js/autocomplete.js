@@ -16,4 +16,4 @@ var word_list = [
     'fred',
     'plugh',
     'xyzzy',
-    'thud']
+    'thud'];
