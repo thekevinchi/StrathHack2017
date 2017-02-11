@@ -33,8 +33,7 @@
         </div>
         <div class="navbar-collapse collapse">
 
-            <form class="navbar-form navbar-left" id="user_form" method="post" action="{% url 'index' %}">
-                {% csrf_token %}
+            <form class="navbar-form navbar-left" id="user_form" method="get" action="{% url 'search' %}">
 
                 <input class="awesomplete form-control" type="text" id="awesome" name="query" value=""
                        placeholder="Search..."/>
@@ -50,7 +49,7 @@
                     awesomplete.list = word_list
                 </script>
 
-                <input class="btn btn-primary" type="submit" name="submit" value="Search"/>
+                <input class="btn btn-primary" type="submit" />
 
             </form>
 
