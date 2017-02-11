@@ -43,6 +43,7 @@
             z-index: 900;
         }
         </style>
+
 </head>
 <body style="height: 100%">
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -55,7 +56,7 @@
                         <i class="material-icons">search</i>
                     </label>
                     <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" id="search">
+                        <input class="mdl-textfield__input" type="text" id="search" name="query">
                         <label class="mdl-textfield__label" for="search">Enter your query...</label>
                     </div>
                 </div>
@@ -74,9 +75,12 @@
         </header>
         <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <header class="demo-drawer-header">
-                <img src="images/user.jpg" class="demo-avatar">
+                <img src="images/user2.jpg" class="demo-avatar">
+                <br>
+                <div><small>CRN</small></div>
                 <div class="demo-avatar-dropdown">
-                    <span>memelord@dank.com</span>
+                    <span>74747284848</span>
+                    <!-- <span>memelord@dank.com</span> -->
                     <div class="mdl-layout-spacer"></div>
                     <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
                         <i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -90,17 +94,18 @@
                 </div>
             </header>
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+                <!-- <a> <i>icon</i> link title </a> -->
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-                <a class="mdl-navigation__link" href="index2.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
+                <a class="mdl-navigation__link" href="index2.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">search</i>Search</a>
+                <a class="mdl-navigation__link" href="faq.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help</i>FAQ</a>
+                <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
                 <div class="mdl-layout-spacer"></div>
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a> -->
             </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
@@ -110,6 +115,7 @@
                         <use xlink:href="#piechart" mask="url(#piemask)" />
                         <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan font-size="0.2" dy="-0.07">%</tspan></text>
                     </svg>
+                    <!-- <div id="donut_single" style="width: 200px; height: 200px;"><div style="width: 50px; height: 50px;">memes</div></div> -->
                     <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
                         <use xlink:href="#piechart" mask="url(#piemask)" />
                         <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
@@ -325,7 +331,11 @@
                 </mask>
                 <g id="piechart">
                     <circle cx=0.5 cy=0.5 r=0.5 />
-                    <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
+                    <!-- grey bit showing unused space -->
+                    <path d="M 0.5 0.5 0.5 0
+                             A 0.5 0.5 0 0 1 1 0.5
+
+                             z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
                 </g>
             </defs>
         </svg>
