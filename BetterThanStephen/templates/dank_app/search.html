@@ -3,10 +3,14 @@
 {% block title %}Search{% endblock %}
 
 {% block body_block %}
-    {% if query and responce %}
+    {% if query and response %}
+        Searched for: {{ query }}    <br/>
 
-        Search for : {{ query }}    <br/>
-        Response   : {{ responce }} <br/>
+        <ul>
+        {% for payment in response %}
+            <li>{{ payment }}</li>
+        {% endfor %}
+        </ul>
 
     {% endif %}
 {% endblock %}
