@@ -80,7 +80,3 @@ def query_db(user_p, keywords):
     print("real amount is: {0}".format(amount))
 
     return loan(user_p, paidBoolean, amount)
-    
-            
-    
-    

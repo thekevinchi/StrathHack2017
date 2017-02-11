@@ -35,4 +35,3 @@ def result(request):
 
 def speech(request):
     return render(request, 'dank_app/speech-demo.html')
-
