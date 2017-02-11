@@ -51,3 +51,5 @@ tests/report/
 # pycharm stuff
 .idea/
 .idea*
+
+db.sqlite3
