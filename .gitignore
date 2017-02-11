@@ -1,4 +1,4 @@
-#### joe made this: http://goel.io/joe
+### joe made this: http://goel.io/joe
 
 #####=== Android ===#####
 
@@ -30,3 +30,24 @@ proguard/
 # Log Files
 *.log
 
+
+# django stuff
+*.egg-info
+*.pot
+*.py[co]
+.tox/
+__pycache__
+MANIFEST
+dist/
+docs/_build/
+docs/locale/
+node_modules/
+tests/coverage_html/
+tests/.coverage
+build/
+tests/report/
+
+
+# pycharm stuff
+.idea/
+.idea*
