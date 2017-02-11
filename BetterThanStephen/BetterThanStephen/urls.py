@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from registration.backends.simple.views import RegistrationView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('dank_app.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+
 ]
