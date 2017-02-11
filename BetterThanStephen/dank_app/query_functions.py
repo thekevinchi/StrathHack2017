@@ -1,3 +1,5 @@
+from query_handling import loan
+
 amount_list = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
 possible_keywords = {"question": ["when", "how"],
@@ -12,7 +14,9 @@ def find_keywords(result_string):
 
     for word in split_result:
         word.lower()
-        if word in possible_keywords["question"]:
+        if word == "all":
+            keywords["amount"] = "0"
+        elif word in possible_keywords["question"]:
             keywords["question"].append(word)
         elif word in possible_keywords["time"]:
             keywords["time"].append(word)
@@ -23,7 +27,6 @@ def find_keywords(result_string):
                 keywords["noun"].append(word)
         elif word in possible_keywords["amount"]:
             keywords["amount"].append(word)
-
     if len(keywords["amount"]) == 0:
         keywords["amount"].append(1)
 
@@ -31,7 +34,7 @@ def find_keywords(result_string):
 
     return keywords
 
-def query_db(keywords):
+def query_db(user_p, keywords):
     question = keywords["question"][0]
     time = keywords["time"][0]
     noun = keywords["noun"][0]
@@ -44,7 +47,7 @@ def query_db(keywords):
 
     whenBoolean = False
     paidBoolean = False
-    amount = 0
+    amount = 1
 
     if question == "when":
         whenBoolean = True
@@ -74,7 +77,9 @@ def query_db(keywords):
         elif amountKeyword in {"ten", "10"}:
             amount = 10
 
-        print("real amount is: {0}".format(amount))
+    print("real amount is: {0}".format(amount))
+
+    return loan(user_p, paidBoolean, amount)
     
             
     
