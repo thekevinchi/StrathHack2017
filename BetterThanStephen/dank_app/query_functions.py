@@ -2,6 +2,20 @@ possible_keywords = {"thing": ["when", "how"],
                      "time": ["next", "last"],
                      "noun": ["payment", "owe"]
                     }
+
+keyword_to_action_dictionary = {
+    "payment" : {"when is next payment" : 1,
+              "how much i owe" : 0},
+    "owe" : {"when is next payment" : 0,
+              "how much i owe" : 1},
+    "next": {"when is next payment" : 1,
+              "how much i owe" : 0},
+    "when": {"when is next payment" : 1,
+              "how much i owe" : 0},
+    "last": {"when is next payment" : 1,
+              "how much i owe" : 0}
+}
+
 #possible_functions = ["when next payment", "how much next payment", ]
 
 def find_keywords(result_string):
@@ -21,6 +35,7 @@ def find_keywords(result_string):
     return keywords
 
 def query_db(keywords):
+    """
     thing = keywords["thing"][0]
     time = keywords["time"][0]
     noun = keywords["noun"][0]
@@ -51,4 +66,17 @@ def query_db(keywords):
                 print(7)
             elif noun == "owe":
                 print(8)
-        
+    """
+
+    for key in keywords:
+        matched_keyword = keywords[key][0]
+        action_1_total = keyword_to_action_dictionary[matched_keyword]["when is next payment"]
+        action_2_total = keyword_to_action_dictionary[matched_keyword]["how much i owe"]
+
+    if action_1_total > action_2_total:
+        print("action 1")
+    elif action_1_total < action_2_total:
+        print("action 2")
+    else:
+        print("choose 1")
+
