@@ -1,23 +1,40 @@
+from operator import itemgetter
+
 possible_keywords = {"thing": ["when", "how"],
                      "time": ["next", "last"],
                      "noun": ["payment", "owe"]
                     }
 
+#mapping keyword to action dictionary ( like matrices )
+#if keyword exist in action, 1 else 0
 keyword_to_action_dictionary = {
+    "when": {"when is next payment": 1,
+             "how much i owe": 0,
+             "when is last payment": 1,
+             "how much is last payment": 0},
+    "how": {"when is next payment": 0,
+            "how much i owe": 1,
+            "when is last payment": 0,
+            "how much is last payment": 1},
     "payment" : {"when is next payment" : 1,
-              "how much i owe" : 0},
+              "how much i owe" : 0,
+              "when is last payment": 1,
+              "how much is last payment": 1},
     "owe" : {"when is next payment" : 0,
-              "how much i owe" : 1},
+             "how much i owe" : 1,
+             "when is last payment": 0,
+             "how much is last payment": 0},
     "next": {"when is next payment" : 1,
-              "how much i owe" : 0},
-    "when": {"when is next payment" : 1,
-              "how much i owe" : 0},
-    "last": {"when is next payment" : 1,
-              "how much i owe" : 0}
+             "how much i owe" : 0,
+             "when is last payment": 0,
+             "how much is last payment": 0},
+    "last": {"when is next payment" : 0,
+             "how much i owe" : 0,
+             "when is last payment": 1,
+             "how much is last payment": 1}
 }
 
-#possible_functions = ["when next payment", "how much next payment", ]
-
+#finding keywords in string
 def find_keywords(result_string):
     keywords = {"thing" : [], "time" : [], "noun" : []}
     split_result = result_string.split(" ")
@@ -35,48 +52,41 @@ def find_keywords(result_string):
     return keywords
 
 def query_db(keywords):
-    """
-    thing = keywords["thing"][0]
-    time = keywords["time"][0]
-    noun = keywords["noun"][0]
 
-    print("thing is: {0}".format(thing))
-    print("time is: {0}".format(time))
-    print("noun is: {0}".format(noun))
+    action_1_total = 0
+    action_2_total = 0
+    action_3_total = 0
+    action_4_total = 0
 
-    if thing == "when":
-        if time == "next":
-            if noun == "payment":
-                print(1)
-            elif noun == "owe":
-                print(2)
-        elif time == "last":
-            if noun == "payment":
-                print(3)
-            elif noun == "owe":
-                print(4)
-    elif thing == "how":
-        if time == "next":
-            if noun == "payment":
-                print(5)
-            elif noun == "owe":
-                print(6)
-        elif time == "last":
-            if noun == "payment":
-                print(7)
-            elif noun == "owe":
-                print(8)
-    """
-
+    # for the matched keywords in string, find which action the combination tends to go to
     for key in keywords:
         matched_keyword = keywords[key][0]
-        action_1_total = keyword_to_action_dictionary[matched_keyword]["when is next payment"]
-        action_2_total = keyword_to_action_dictionary[matched_keyword]["how much i owe"]
+        action_1_total = action_1_total + keyword_to_action_dictionary[matched_keyword]["when is next payment"]
+        action_2_total = action_2_total + keyword_to_action_dictionary[matched_keyword]["how much i owe"]
+        action_3_total = action_3_total + keyword_to_action_dictionary[matched_keyword]["when is last payment"]
+        action_4_total = action_4_total + keyword_to_action_dictionary[matched_keyword]["how much is last payment"]
 
-    if action_1_total > action_2_total:
-        print("action 1")
-    elif action_1_total < action_2_total:
-        print("action 2")
-    else:
-        print("choose 1")
+    action_list = [["action 1", action_1_total],
+                   ["action 2", action_2_total],
+                   ["action 3", action_3_total],
+                   ["action 4", action_4_total]]
 
+    # sort and get action with most weight a.k.a chosen action
+    sorted_action_list = sorted(action_list, key=itemgetter(1))
+    max_action = sorted_action_list[len(sorted_action_list)-1]
+    chosen_actions =[[]]
+    chosen_actions.append(max_action)
+
+    i=2
+
+    # check if there is more than one action that has same weight
+    # if there is, we ask user which one do u want
+    while (max_action == sorted_action_list[len(sorted_action_list)-i]):
+        chosen_actions.append(sorted_action_list(len(sorted_action_list) - i))
+        i = i + 1
+
+    if len(chosen_actions) > 1 :
+        for action in chosen_actions:
+            print(action)
+    elif len(chosen_actions) == 1:
+        print(chosen_actions[0][0])
