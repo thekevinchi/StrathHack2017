@@ -1,17 +1,26 @@
 from django.shortcuts import render, HttpResponseRedirect
 from query_functions import find_keywords, query_db
+from django.contrib.auth.models import User
+from dank_app.models import UserProfile
 
 def index(request):
     return render(request, 'dank_app/index.html')
 
 def search(request):
     if request.method == 'GET':
+        user = User.objects.get(username='bob')
+        user_p = UserProfile.objects.get(user_account=user)
+
         query = request.GET.get('query', '')
-        # todo query pass to nathen
-        # nathen will return a context d
-        responce = "output would go here"
+        keywords = find_keywords(query)
+        response = query_db(user_p, keywords)
+        
+        for payment in response:
+            print payment
+
+        # nathen will return a context dict
         context_dict = {"query": query,
-                        "responce": responce}
+                        "response": response}
         return render(request, 'dank_app/search.html', context_dict)
     else:
         return HttpResponseRedirect('/')
