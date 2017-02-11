@@ -3,5 +3,6 @@ from django.conf.urls import patterns, url, include
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'result/?$', views.result, name='result'),
     url(r'speech$', views.speech, name='speech'),
 ]
