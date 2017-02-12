@@ -1,0 +1,16 @@
+{
+  "name": "Student Loans Company",
+  "short_name": "SLC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#027B6E",
+  "description": "An app for the SLC.",
+  "icons": [
+    {
+      "src": "static/android-desktop.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": 4.0
+    }
+  ]
+}

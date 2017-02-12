@@ -9,9 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>{% block title %}Student Loans Company{% endblock %}</title>
 
+
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="{% static "images/android-desktop.png" %}">
+    <link rel="manifest" href="{% static "manifest.json" %}">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -87,7 +89,7 @@
     </header>
     <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
-            <img src="{% static "images/user2.jpg" %}" class="demo-avatar">
+            <img src="{% media "images/{{ user.userprofile.crn }}.jpg" %}" class="demo-avatar">
             <br>
             <div>
                 <small>CRN</small>
