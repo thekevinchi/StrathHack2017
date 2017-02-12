@@ -1,15 +1,26 @@
 var synth = window.speechSynthesis;
 
-var inputForm = document.querySelector('form');
-var inputTxt = document.querySelector('.txt');
-var voiceSelect = document.querySelector('select');
-
-var pitch = document.querySelector('#pitch');
-var pitchValue = document.querySelector('.pitch-value');
-var rate = document.querySelector('#rate');
-var rateValue = document.querySelector('.rate-value');
+var inputForm = document.getElementById("input-form");
+var inputTxt = document.getElementById("input-text");
+var voiceSelect = document.getElementById("language-select");
 
 var voices = [];
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function speakPayments() {
+    setTimeout(function() {
+        voiceSelect.selectedIndex = 2;
+        var payments = document.getElementsByClassName("payment-entry");
+        for (var i = 0, len = payments.length; i < len; i++) {
+            //console.log(payments[i].innerText);
+            //populateVoiceList();
+            speak(payments[i].innerText);
+        }
+    }, 500);
+}
 
 function populateVoiceList() {
 	voices = synth.getVoices();
@@ -32,14 +43,17 @@ function populateVoiceList() {
 
 function speak(text) {
 	var utterThis = new SpeechSynthesisUtterance(text);
+    console.log(voiceSelect);
+    console.log(voiceSelect.selectedOptions);
+    console.log(voiceSelect.selectedOptions[0]);
 	var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
 	for(i = 0; i < voices.length ; i++) {
 		if(voices[i].name === selectedOption) {
   			utterThis.voice = voices[i];
 		}
 	}
-	utterThis.pitch = pitch.value;
-	utterThis.rate = rate.value;
+	utterThis.pitch = 1;
+	utterThis.rate = 1;
 	synth.speak(utterThis);
 
 	utterThis.onpause = function(event) {
@@ -54,21 +68,15 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 	speechSynthesis.onvoiceschanged = populateVoiceList;
 }
 
-document.getElementById("submit-button").onclick = function(){
+document.getElementById("talk-button").onclick = function(){
 	event.preventDefault();
 	speak(inputTxt.value);
 }
 
+/*
 inputForm.onsubmit = function(event) {
 	event.preventDefault();
 	speak(inputTxt.value);
 }
-
-pitch.onchange = function() {
-	pitchValue.textContent = pitch.value;
-}
-
-rate.onchange = function() {
-	rateValue.textContent = rate.value;
-}
-
+*/
+speakPayments();
