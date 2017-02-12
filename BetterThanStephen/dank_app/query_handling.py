@@ -9,13 +9,16 @@ from django.contrib.auth.models import User
 
 from dank_app.models import UserProfile, Payments
 
-amount_list = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
-amount_list.extend(str(i) for i in xrange(0, 100))
+number_word_list = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety", "hundred", "thousand", "million", "billion", "trillion"]
+
+number_int_list = [str(i) for i in xrange(0, 100)]
 
 possible_keywords = {"question": ["when", "how"],
                      "time": ["next", "last", "due"],
                      "noun": ["payment", "payments", "owe", "loan", "loans"],
-                     "amount": amount_list
+                     "amount": number_int_list
                      }
 
 def text2int(textnum, numwords={}):
@@ -52,10 +55,27 @@ def find_keywords(result_string):
     keywords = {"question": [], "time": [], "noun": [], "amount": []}
     split_result = result_string.split(" ")
 
+    found_number = False
+
     for word in split_result:
         word = re.sub(r'\W+', '', word).lower()
-        print word
-        if word == "all":
+
+        #converts any numbers that are expressed in words to integers
+        if (not found_number) and (word in number_word_list):
+            found_number = True
+            list_of_number_words = [word]
+            firstPosition = [i for i,x in enumerate(split_result) if x == word][0] + 1
+            for i in xrange(firstPosition, len(split_result)):
+                newWord = split_result[i]
+                if newWord not in number_word_list:
+                    break
+                else:
+                    list_of_number_words.append(newWord)
+            string = ' '.join(list_of_number_words)
+            keywords["amount"].append(text2int(string))
+        elif word in possible_keywords["amount"]:
+            keywords["amount"].append(int(word))
+        elif word == "all":
             keywords["amount"] = "0"
         elif word in possible_keywords["question"]:
             keywords["question"].append(word)
@@ -74,12 +94,6 @@ def find_keywords(result_string):
                 keywords["time"].append("next")
             else:
                 keywords["noun"].append(word)
-        elif word in possible_keywords["amount"]:
-            print("here")
-            if (len(word) > 2):
-                keywords["amount"].append(text2int(word))
-            else:
-                keywords["amount"].append(int(word))
 
     #if no amount is given, default to 1 record
     if len(keywords["amount"]) == 0:

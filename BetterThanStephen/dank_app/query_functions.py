@@ -1,4 +1,4 @@
-from query_handling import find_keywords, loan, amount_list
+from query_handling import find_keywords, loan
 
 def query_db(user_p, query):
 
