@@ -1,9 +1,33 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}FAQ{% endblock %}
 
 {% block body_block %}
+<div class="mdl-card__supporting-text mdl-color-text--grey-600">
+<style>
+h4 {
+    color: black;
+}
+</style>
+<h4>When will I get paid?</h4>
 
-    FAQ:
+We will be able to issue payment once the university has confirmed your registration.
+
+<h4>How much do I owe?</h4>
+
+Info on https://www.gov.uk/student-finance/overview
+
+<h4>Have you received my application?</h4>
+
+You can check the <a href="{% url "index" %}">Home page</a> to confirm.
+
+<h4>Will I be approved for a loan?</h4>
+
+You will be considered based on the eligibility criteria for your loan. Eligibility criteria can vary from country to country within the UK. It can also be different based on whether you are an undergraduate or postgraduate. Typically you will have to satisfy the residency criteria (e.g. 3 years prior to the start of the course).
+
+<h4>What are the eligibility criteria?</h4>
+
+As mentioned above, the criteria is three years residency prior to the course start.
+</div>
 
 {% endblock %}
