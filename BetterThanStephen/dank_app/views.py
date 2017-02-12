@@ -13,8 +13,7 @@ def search(request):
         user_p = UserProfile.objects.get(user_account=user)
 
         query = request.GET.get('query', '')
-        keywords = find_keywords(query)
-        response = query_db(user_p, keywords)
+        response = query_db(user_p, query)
 
         context_dict = {"query": query,
                         "response": response}
