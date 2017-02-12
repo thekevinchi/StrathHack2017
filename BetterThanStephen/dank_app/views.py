@@ -12,18 +12,18 @@ def index(request):
         user = request.user
         all_payments = Payments.objects.filter(user=user.userprofile)
         total_to_be_payed = 0
-        payments_recived = 0
+        payments_received = 0
         for payment in all_payments:
             if payment.paid:
-                payments_recived += payment.amount
+                payments_received += payment.amount
             total_to_be_payed += payment.amount
 
-        percent_paid = int((float(payments_recived) / total_to_be_payed) * 100)
+        percent_paid = int((float(payments_received) / total_to_be_payed) * 100)
         graph_path = pos(percent_paid)
         context_dict = {'user': user,
                         'percent_paid': percent_paid,
                         'graph_path': graph_path,
-                        'payments_recived':payments_recived,
+                        'payments_received':payments_received,
                         'total_to_be_payed':total_to_be_payed,}
         print context_dict
         return render(request, 'dank_app/index.html', context_dict)
@@ -95,18 +95,18 @@ def info(request):
         user = request.user
         all_payments = Payments.objects.filter(user=user.userprofile)
         total_to_be_payed = 0
-        payments_recived = 0
+        payments_received = 0
         for payment in all_payments:
             if payment.paid:
-                payments_recived += payment.amount
+                payments_received += payment.amount
             total_to_be_payed += payment.amount
 
-        percent_paid = int((float(payments_recived) / total_to_be_payed) * 100)
+        percent_paid = int((float(payments_received) / total_to_be_payed) * 100)
         graph_path = pos(percent_paid)
         context_dict = {'user': user,
                         'percent_paid': percent_paid,
                         'graph_path': graph_path,
-                        'payments_recived':payments_recived,
+                        'payments_received':payments_received,
                         'total_to_be_payed':total_to_be_payed,}
         print context_dict
         return render(request, 'dank_app/info.html', context_dict)

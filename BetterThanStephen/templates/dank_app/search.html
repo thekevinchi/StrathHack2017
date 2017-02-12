@@ -23,7 +23,7 @@
                 Searched for: {{ query }} <br/>
                 <ul>
                     {% for payment in response %}
-                        <li class="payment-entry">£{{ payment }}</li>
+                        <li class="payment-entry">{{ payment|safe }}</li>
                     {% endfor %}
                 </ul>
 
