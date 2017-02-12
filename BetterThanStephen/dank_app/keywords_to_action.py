@@ -1,4 +1,5 @@
 import operator
+from query_handling import loan
 
 actions = ['last_payment_time',
            'last_payment_amount',
@@ -25,4 +26,9 @@ def identify_action(query):
     if len([action for action in result_dict if result_dict[action] == largest_match]) > 1:
         return [action for action in result_dict if result_dict[action] == largest_match]
     else:
-        return sorted(result_dict.items(), key=operator.itemgetter(1))[-1][0]
+        return [sorted(result_dict.items(), key=operator.itemgetter(1))[-1][0]]
+
+def query_db(query):
+    action = identify_action(query)
+
+    return loan(user_p, paidBoolean, amount)  
