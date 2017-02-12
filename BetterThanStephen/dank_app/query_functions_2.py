@@ -1,13 +1,13 @@
 from operator import itemgetter
-
+from query_handling import loan
 #paid boolean     - past/last=true, future/next=false
-#when/how boolean - 
 #howMany int      - amount
 
 
 possible_keywords = {"thing": ["when", "how"],
                      "time": ["next", "last"],
-                     "noun": ["payment", "owe"]
+                     "noun": ["payment", "owe"],
+                     "amount": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
                     }
 
 ACTION_1_NAME = "When is my next payment?"
@@ -61,7 +61,7 @@ keyword_to_action_dictionary = {
 
 #finding keywords in string
 def find_keywords(result_string):
-    keywords = {"thing" : [], "time" : [], "noun" : []}
+    keywords = {"thing" : [], "time" : [], "noun" : [], "amount": []}
     split_result = result_string.split(" ")
 
     for word in split_result:
@@ -71,26 +71,34 @@ def find_keywords(result_string):
             keywords["time"].append(word)
         elif word in possible_keywords["noun"]:
             keywords["noun"].append(word)
+        elif word in possible_keywords["amount"]:
+            keywords["amount"].append(word)
+        elif word not in possible_keywords["amount"]:
+            keywords["amount"].append("1")
 
     print("split_result is: {0}".format(split_result))
 
     return keywords
 
-def query_db(keywords):
+def query_db(user_p, keywords):
     action_1_total = 0
     action_2_total = 0
     action_3_total = 0
     action_4_total = 0
     action_5_total = 0
 
+    if ((len(keywords["thing"]) == 0) or (len(keywords["time"]) == 0) or (len(keywords["noun"]) == 0) or (len(keywords["amount"]) == 0)):
+        return []
+
     # for the matched keywords in string, find which action the combination tends to go to
     for key in keywords:
-        matched_keyword = keywords[key][0]
-        action_1_total = action_1_total + keyword_to_action_dictionary[matched_keyword][ACTION_1_NAME]
-        action_2_total = action_2_total + keyword_to_action_dictionary[matched_keyword][ACTION_2_NAME]
-        action_3_total = action_3_total + keyword_to_action_dictionary[matched_keyword][ACTION_3_NAME]
-        action_4_total = action_4_total + keyword_to_action_dictionary[matched_keyword][ACTION_4_NAME]
-        action_5_total = action_5_total + keyword_to_action_dictionary[matched_keyword][ACTION_5_NAME]
+        if key != "amount":
+            matched_keyword = keywords[key][0]
+            action_1_total = action_1_total + keyword_to_action_dictionary[matched_keyword][ACTION_1_NAME]
+            action_2_total = action_2_total + keyword_to_action_dictionary[matched_keyword][ACTION_2_NAME]
+            action_3_total = action_3_total + keyword_to_action_dictionary[matched_keyword][ACTION_3_NAME]
+            action_4_total = action_4_total + keyword_to_action_dictionary[matched_keyword][ACTION_4_NAME]
+            action_5_total = action_5_total + keyword_to_action_dictionary[matched_keyword][ACTION_5_NAME]
 
     action_list = [[ACTION_1_NAME, action_1_total],
                    [ACTION_2_NAME, action_2_total],
@@ -101,10 +109,12 @@ def query_db(keywords):
     # sort and get action with most weight a.k.a chosen action
     sorted_action_list = sorted(action_list, key=itemgetter(1))
     max_action = sorted_action_list[len(sorted_action_list)-1]
-    chosen_actions =[[]]
+    chosen_actions =[]
     chosen_actions.append(max_action)
 
     i=2
+
+    amount = keywords["amount"][0]
 
     # check if there is more than one action that has same weight
     # if there is, we ask user which one do u want
@@ -114,6 +124,10 @@ def query_db(keywords):
 
     if len(chosen_actions) > 1 :
         for action in chosen_actions:
-            print(action)
+            print action
+
+            #kevin_query(actions_dictionary[action][0], actions_dictionary[action][1], amount)
     elif len(chosen_actions) == 1:
-        print(chosen_actions[0][0])
+        return loan(user_p, actions_dictionary[chosen_actions[0][0]][0], int(amount))
+        # kevin_query(actions_dictionary[chosen_actions[0][0]][0], actions_dictionary[chosen_actions[0][0]][1], amount)
+
