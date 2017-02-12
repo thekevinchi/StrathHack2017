@@ -1,7 +1,7 @@
 # - coding: utf-8 -
 
 from query_handling import find_keywords, loan, status
-from keywords_to_action import actions, keywords, identify_action
+from keywords_to_action import identify_action
 
 def query_db(user_p, query):
 
