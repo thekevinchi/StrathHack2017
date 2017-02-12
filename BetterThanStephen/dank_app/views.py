@@ -35,3 +35,10 @@ def result(request):
 
 def speech(request):
     return render(request, 'dank_app/speech-demo.html')
+
+def graph(request):
+    return render(request, 'dank_app/graph.html')
+
+def faq(request):
+    return render(request, 'dank_app/faq.html')
+
