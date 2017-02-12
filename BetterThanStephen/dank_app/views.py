@@ -7,6 +7,7 @@ from dank_app.models import UserProfile, Payments
 
 
 def index(request):
+
     if request.user.is_active:
         user = request.user
         all_payments = Payments.objects.filter(user=user.userprofile)
@@ -31,12 +32,15 @@ def index(request):
 
 
 def search(request):
+
     if request.user.is_active:
         user = request.user
         if request.method == 'GET':
+
             query = request.GET.get('query', '')
-            keywords = find_keywords(query)
-            response = query_db(user.userprofile, keywords)
+
+            #keywords = find_keywords(query) -- This break the search earlier
+            response = query_db(user.userprofile, query)
 
             context_dict = {"query": query,
                             "response": response,
@@ -61,16 +65,18 @@ def search(request):
 def result(request):
     if request.user.is_active:
         user = request.user
+
     else:
         user = None
     context_dict = {'user': user}
+
     result_string = request.GET['result_string']
     keywords = find_keywords(result_string)
 
     print("result_string is: {0}".format(result_string))
     print("keywords are: {0}".format(keywords))
 
-    query_db(keywords)
+    #query_db(keywords)
 
     return render(request, 'dank_app/index.html', context_dict)
 

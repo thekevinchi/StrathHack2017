@@ -99,8 +99,6 @@ def find_keywords(result_string):
     if len(keywords["amount"]) == 0:
         keywords["amount"].append(1)
 
-    print keywords
-
     return keywords
 
 def loan(user, paid, amount):
