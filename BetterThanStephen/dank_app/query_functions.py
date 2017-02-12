@@ -9,10 +9,13 @@ def query_db(user_p, query):
     print action
 
     if len(action) > 1:
-        s = ['Conflict. Did you mean: ']
-        for el in action:
-            s.append('<a href="?query={0}">{1}</a>'.format(el, el.replace('_', ' ')))
-        return s
+        if action == ['next_payment_time', 'next_payment_amount'] or action == ['last_payment_time', 'last_payment_amount']:
+            action = [action[0]]
+        else:
+            s = ['Conflict. Did you mean: ']
+            for el in action:
+                s.append('<a href="?query={0}">{1}</a>'.format(el, el.replace('_', ' ')))
+            return s
 
     keywords = find_keywords(query)
 
@@ -28,6 +31,5 @@ def query_db(user_p, query):
         l = ['<a href="/faq">The Frequently Asked Questions can be found here</a>']
     elif action[0] in {'get_status'}:
         l = [status(user_p)]
-
     
     return l
