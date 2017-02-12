@@ -9,9 +9,24 @@ from dank_app.models import UserProfile, Payments
 def index(request):
     if request.user.is_active:
         user = request.user
-    else:
-        user = None
-    context_dict = {'user': user}
+        all_payments = Payments.objects.filter(user=user.userprofile)
+        total_to_be_payed = 0
+        payments_recived = 0
+        for payment in all_payments:
+            if payment.paid:
+                payments_recived += payment.amount
+            total_to_be_payed += payment.amount
+
+        percent_paid = int((float(payments_recived) / total_to_be_payed) * 100)
+        graph_path = pos(percent_paid)
+        context_dict = {'user': user,
+                        'percent_paid': percent_paid,
+                        'graph_path': graph_path,
+                        'payments_recived':payments_recived,
+                        'total_to_be_payed':total_to_be_payed,}
+        print context_dict
+        return render(request, 'dank_app/index.html', context_dict)
+    context_dict = {'user': None}
     return render(request, 'dank_app/index.html', context_dict)
 
 
@@ -69,7 +84,7 @@ def speech(request):
     return render(request, 'dank_app/speech-demo.html', context_dict)
 
 
-def graph(request):
+def info(request):
     if request.user.is_active:
         user = request.user
         all_payments = Payments.objects.filter(user=user.userprofile)
@@ -88,7 +103,7 @@ def graph(request):
                         'payments_recived':payments_recived,
                         'total_to_be_payed':total_to_be_payed,}
         print context_dict
-        return render(request, 'dank_app/graph.html', context_dict)
+        return render(request, 'dank_app/info.html', context_dict)
     else:
         return HttpResponseRedirect('/')
 

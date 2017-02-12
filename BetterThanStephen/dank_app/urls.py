@@ -6,6 +6,6 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     url(r'^result/$', views.result, name='result'),
     url(r'^speech/$', views.speech, name='speech'),
-    url(r'^graph/$', views.graph, name='graph'),
+    url(r'^info/$', views.info, name='info'),
     url(r'^faq/$', views.faq, name='faq'),
 ]
