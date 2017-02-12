@@ -256,11 +256,10 @@
                     var range = document.createRange();
                     range.selectNode(document.getElementById('search'));
                     window.getSelection().addRange(range);
+                    range.selectNode(document.getElementById('user_form'));
+                    window.getSelection().addRange(range);
                 }
-                if (create_email) {
-                    create_email = false;
-                    createEmail();
-                }
+                user_form.submit()
             };
             recognition.onresult = function (event) {
                 console.log(event);
