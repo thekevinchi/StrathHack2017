@@ -11,7 +11,7 @@ class UserProfile(models.Model):
                       ('rp', "repayment"),
                       ('cc', "canceled"))
     status = models.CharField(max_length=2, choices=status_options)
-
+    crn= models.IntegerField(unique=True)
     def __unicode__(self):
         return self.user.username
 
