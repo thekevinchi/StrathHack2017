@@ -24,10 +24,10 @@ class Payments(models.Model):
 
     def __unicode__(self):
         if self.paid:
-            return "%s %s - %i paid on the %s" % (self.user.user_account.first_name,
-                                                  self.user.user_account.last_name,
+            return "%i paid on %s" % (#self.user.user_account.first_name,
+                                          #        self.user.user_account.last_name,
                                                   self.amount, self.due_date)
         else:
-            return "%s %s - %i due on the %s" % (self.user.user_account.first_name,
-                                                 self.user.user_account.last_name,
+            return "%i due on %s" % (#self.user.user_account.first_name,
+                                          #       self.user.user_account.last_name,
                                                  self.amount, self.due_date)
