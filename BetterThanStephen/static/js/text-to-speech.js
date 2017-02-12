@@ -6,10 +6,6 @@ var voiceSelect = document.getElementById("language-select");
 
 var voices = [];
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function speakPayments() {
     setTimeout(function() {
         voiceSelect.selectedIndex = 2;
