@@ -80,6 +80,7 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'BetterThanStephen.urls'
 
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'BetterThanStephen.wsgi.application'
 

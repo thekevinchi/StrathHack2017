@@ -1,3 +1,5 @@
+from math import sin, pi, cos
+
 from django.shortcuts import render, HttpResponseRedirect
 from query_functions import find_keywords, query_db
 from django.contrib.auth.models import User
@@ -78,12 +80,16 @@ def graph(request):
                 payments_recived += payment.amount
             total_to_be_payed += payment.amount
 
-
+        percent_paid = int((float(payments_recived)/total_to_be_payed)*100)
+        graph_path = pos(percent_paid)
+        context_dict = {'user': user,
+                        'percent_paid':percent_paid,
+                        'graph_path':graph_path,}
+        print context_dict
+        return render(request, 'dank_app/graph.html',context_dict)
     else:
-        user = None
-    context_dict = {'user': user,}
-                    # 'percnetage':}
-    return render(request, 'dank_app/graph.html')
+        return HttpResponseRedirect('/')
+
 
 
 def faq(request):
@@ -93,3 +99,20 @@ def faq(request):
         user = None
     context_dict = {'user': user}
     return render(request, 'dank_app/faq.html', context_dict)
+
+def pos(x):
+    # you need to do "from math import *" because I'm a lazy bastard
+    if x >= 75:
+        return "M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 %f %f z" % ( (sin((100-x)/100.0 * 2 * pi) + 1)/2, (1 - cos((100-x)/100.0 * 2 * pi))/2 )
+    elif x >= 50:
+        res = "M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 1 0.5"
+        res += "M 0.5 0.5 1 0.5 A 0.5 0.5 0 0 1 %f %f" % ( (sin((100-x)/100.0 * 2 * pi) + 1)/2, (1 - cos((100-x)/100.0 * 2 * pi))/2 )
+    elif x >= 25:
+        res = "M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 1 0.5 M 0.5 0.5 1 0.5 A 0.5 0.5 0 0 1 0.5 1"
+        res += "M 0.5 0.5 0.5 1 A 0.5 0.5 0 0 1 %f %f" % ( (sin((100-x)/100.0 * 2 * pi) + 1)/2, (1 - cos((100-x)/100.0 * 2 * pi))/2 )
+    else:
+        res = "M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 1 0.5 M 0.5 0.5 1 0.5 A 0.5 0.5 0 0 1 0.5 1 M 0.5 0.5 0.5 1 A 0.5 0.5 0 0 1 0 0.5"
+        res += "M 0.5 0.5 0 0.5 A 0.5 0.5 0 0 1 %f %f" % ( (sin((100-x)/100.0 * 2 * pi) + 1)/2, (1 - cos((100-x)/100.0 * 2 * pi))/2 )
+    res += ' z'
+    # this will return a svg drawing that you put into the d attribute
+    return res
