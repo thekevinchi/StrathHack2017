@@ -7,13 +7,21 @@
 
     <form class="form-signin" role="form" method="post" action=".">
         {% csrf_token %}
+        <div class="mdl-card__supporting-text">
+            <h3 class="form-signin-heading">Login </h3>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
+                <label class="mdl-textfield__label" for="username">Username</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" id="id_password" maxlength="254" name="password" type="text" required autofocus=""/>
+                <label class="mdl-textfield__label" for="password">Password</label>
+            </div>
 
-        <h2 class="form-signin-heading">Login </h2>
-        <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text"
-               required autofocus=""/>
-        <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" required/>
+            <button class="mdl-button mdl-js-button mdl-button--raised" type="submit" value="Submit">Sign in</button>
+        </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
+        <!-- <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" required/> -->
     </form>
 
 {% endblock %}

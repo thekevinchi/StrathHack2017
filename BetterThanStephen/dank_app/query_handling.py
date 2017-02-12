@@ -113,6 +113,8 @@ def loan(user, paid, amount):
 
     return payments
 
+def status(user):
+    return 'Your application status is ' + user.status
 
 # # testing run
 # user = User.objects.get(username='bob')

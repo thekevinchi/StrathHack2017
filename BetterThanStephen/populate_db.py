@@ -44,7 +44,8 @@ def populate():
                     password="jen",
                     email="jen@hotmail.com",
                     crn=93828371023,
-                    dob="1982-01-01")
+                    dob="1982-01-01",
+                    status="data entry")
 
     for i in xrange(1, 13, 3):
         add_payment(user=user,

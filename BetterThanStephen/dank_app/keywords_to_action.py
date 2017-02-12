@@ -5,7 +5,8 @@ actions = ['last_payment_time',
            'next_payment_time',
            'next_payment_amount',
            'amount_owed',
-           'display_faq'
+           'display_faq',
+           'get_status'
            ]
 
 keywords = {"when": [0, 2],
@@ -21,7 +22,9 @@ keywords = {"when": [0, 2],
             "assist": [5],
             "frequently": [5],
             "asked": [5],
-            "question": [5]}
+            "question": [5],
+            "application": [6],
+            "status": [6]}
 
 def identify_action(query):
     # for solving ambiguities
