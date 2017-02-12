@@ -43,9 +43,6 @@ function populateVoiceList() {
 
 function speak(text) {
 	var utterThis = new SpeechSynthesisUtterance(text);
-    console.log(voiceSelect);
-    console.log(voiceSelect.selectedOptions);
-    console.log(voiceSelect.selectedOptions[0]);
 	var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
 	for(i = 0; i < voices.length ; i++) {
 		if(voices[i].name === selectedOption) {
@@ -73,10 +70,4 @@ document.getElementById("talk-button").onclick = function(){
 	speak(inputTxt.value);
 }
 
-/*
-inputForm.onsubmit = function(event) {
-	event.preventDefault();
-	speak(inputTxt.value);
-}
-*/
 speakPayments();
