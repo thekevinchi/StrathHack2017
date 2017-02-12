@@ -84,7 +84,9 @@ def graph(request):
         graph_path = pos(percent_paid)
         context_dict = {'user': user,
                         'percent_paid': percent_paid,
-                        'graph_path': graph_path, }
+                        'graph_path': graph_path,
+                        'payments_recived':payments_recived,
+                        'total_to_be_payed':total_to_be_payed,}
         print context_dict
         return render(request, 'dank_app/graph.html', context_dict)
     else:
