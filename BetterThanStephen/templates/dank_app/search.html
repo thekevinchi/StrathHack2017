@@ -21,9 +21,9 @@
             <div class="mdl-card__supporting-text mdl-color-text--grey-600">
 
                 Searched for: {{ query }} <br/>
-                <ul>
+                <ul class='mdl-list'>
                     {% for payment in response %}
-                        <li class="payment-entry">{{ payment|safe }}</li>
+                        <li class="payment-entry mdl-list__item">{{ payment|safe }}</li>
                     {% endfor %}
                 </ul>
 
@@ -43,5 +43,33 @@
             </div>
         </div>
     {% endif %}
-    <script src="{% static "js/text-to-speech.js" %}"></script>
+    <script>
+    // msg.voiceURI = 'native';
+    // msg.volume = 1; // 0 to 1
+    // msg.rate = 1; // 0.1 to 10
+    // msg.pitch = 1; //0 to 2
+    
+
+    function speak(text) {
+        var msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        speechSynthesis.speak(msg);
+    }
+
+    function speakPayments() {
+        setTimeout(function() {
+            // voiceSelect.selectedIndex = 2;
+            var payments = document.getElementsByClassName("payment-entry");
+            for (var i = 0, len = payments.length; i < len; i++) {
+                //console.log(payments[i].innerText);
+                //populateVoiceList();
+                speak(payments[i].innerText);
+            }
+        }, 1000);
+    }
+
+    speakPayments();
+
+    </script>
+    <!-- <script src="{% static "js/text-to-speech.js" %}"></script> -->
 {% endblock %}

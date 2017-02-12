@@ -30,8 +30,8 @@ function populateVoiceList() {
 		  	option.textContent += ' -- DEFAULT';
 		}
 
-		option.setAttribute('data-lang', voices[i].lang);
-		option.setAttribute('data-name', voices[i].name);
+		option.setAttribute('data-lang', 'en-GB');
+		// option.setAttribute('data-name', voices[i].name);
 		voiceSelect.appendChild(option);
 	}
 	voiceSelect.selectedIndex = selectedIndex;
