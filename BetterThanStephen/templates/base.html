@@ -100,10 +100,13 @@
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
             <!-- <a> <i>icon</i> link title </a> -->
+            {# todo find icons#}
             <a class="mdl-navigation__link" href="{% url "index" %}"><i
                     class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-            <a class="mdl-navigation__link" href="{% url "graph" %}"><i
-                    class="mdl-color-text--blue-grey-400 material-icons" role="presentation">search</i>Search</a>
+            {% if user.is_authenticated %}
+                <a class="mdl-navigation__link" href="{% url "graph" %}"><i
+                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">search</i>Search</a>
+            {% endif %}
             <a class="mdl-navigation__link" href="{% url "faq" %}"><i
                     class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help</i>FAQ</a>
             {% if user.is_authenticated %}
