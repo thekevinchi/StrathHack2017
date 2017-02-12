@@ -89,7 +89,8 @@
     </header>
     <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
-            <img src="{{ STATIC_URL }}media/images/{{ user.userprofile.crn }}.jpg" class="demo-avatar" onerror="this.onerror=null;this.src='{% static "images/defaultpicture.jpg" %}'">
+            <img src="{{ STATIC_URL }}media/images/{{ user.userprofile.crn }}.jpg" class="demo-avatar"
+                 onerror="this.onerror=null;this.src='{% static "images/defaultpicture.jpg" %}'">
             <br>
             <div>
                 <small>CRN</small>
@@ -112,13 +113,24 @@
             <a class="mdl-navigation__link" href="{% url "faq" %}"><i
                     class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help</i>FAQ</a>
             {% if user.is_authenticated %}
-                <a class="mdl-navigation__link" href="{% url 'auth_logout' %}?next=/"><i
-                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Logout</a>
+                <a class="mdl-navigation__link" href="{% url 'auth_logout' %}?next=/"><svg class="mdl-color-text--blue-grey-400 material-icons" role="presentation"
+                         style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#78909c"
+                              d="M17,17.25V14H10V10H17V6.75L22.25,12L17,17.25M13,2A2,2 0 0,1 15,4V8H13V4H4V20H13V16H15V20A2,2 0 0,1 13,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2H13Z" />
+                    </svg>Logout</a>
             {% else %}
-                <a class="mdl-navigation__link" href="{% url 'auth_login' %}?next=/"><i
-                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Login</a>
-                <a class="mdl-navigation__link" href="{% url 'registration_register' %}"><i
-                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Register Here
+                <a class="mdl-navigation__link" href="{% url 'auth_login' %}?next=/">
+                    <svg class="mdl-color-text--blue-grey-400 material-icons" role="presentation"
+                         style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#78909c"
+                              d="M10,17.25V14H3V10H10V6.75L15.25,12L10,17.25M8,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H8A2,2 0 0,1 6,20V16H8V20H17V4H8V8H6V4A2,2 0 0,1 8,2Z"/>
+                    </svg>
+                    Login</a>
+                <a class="mdl-navigation__link" href="{% url 'registration_register' %}"><svg class="mdl-color-text--blue-grey-400 material-icons" role="presentation"
+                         style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#78909c"
+                              d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z" />
+                    </svg>Register Here
                 </a>
             {% endif %}
             <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
