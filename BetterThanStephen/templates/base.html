@@ -93,18 +93,9 @@
                 <small>CRN</small>
             </div>
             <div class="demo-avatar-dropdown">
-                <span>74747284848</span>
+                <span>{{ user.userprofile.crn }}</span>
                 <!-- <span>memelord@dank.com</span> -->
                 <div class="mdl-layout-spacer"></div>
-                <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-                    <i class="material-icons" role="presentation">arrow_drop_down</i>
-                    <span class="visuallyhidden">Accounts</span>
-                </button>
-                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-                    <li class="mdl-menu__item">funposter@dank.com</li>
-                    <li class="mdl-menu__item">hotpocket@dank.com</li>
-                    <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
-                </ul>
             </div>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
@@ -115,6 +106,16 @@
                     class="mdl-color-text--blue-grey-400 material-icons" role="presentation">search</i>Search</a>
             <a class="mdl-navigation__link" href="{% url "faq" %}"><i
                     class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help</i>FAQ</a>
+            {% if user.is_authenticated %}
+                <a class="mdl-navigation__link" href="{% url 'auth_logout' %}?next=/"><i
+                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Logout</a>
+            {% else %}
+                <a class="mdl-navigation__link" href="{% url 'auth_login' %}?next=/"><i
+                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Login</a>
+                <a class="mdl-navigation__link" href="{% url 'registration_register' %}"><i
+                        class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Register Here
+                </a>
+            {% endif %}
             <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
             <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
             <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
@@ -198,137 +199,139 @@
         var ignore_onend;
         var start_timestamp;
         if (!('webkitSpeechRecognition' in window)) {
-          upgrade();
+            upgrade();
         } else {
-          var recognition = new webkitSpeechRecognition();
-          recognition.continuous = true;
-          recognition.interimResults = true;
-          recognition.onstart = function() {
-            recognizing = true;
-            // showInfo ('info_speak_now');
-            // mic change here
-            // start_img.src = 'mic-animate.gif';
-            console.log(start_img);
-            start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--red-600";
-          };
-          recognition.onerror = function(event) {
-            if (event.error == 'no-speech') {
-              // start_img.src = 'mic.gif';
-              start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
-              // showInfo ('info_no_speech');
-              ignore_onend = true;
-            }
-            if (event.error == 'audio-capture') {
-              // start_img.src = 'mic.gif';
-              start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
-              // showInfo ('info_no_microphone');
-              ignore_onend = true;
-            }
-            if (event.error == 'not-allowed') {
-              if (event.timeStamp - start_timestamp < 100) {
-                // showInfo ('info_blocked');
-              } else {
-                // showInfo ('info_denied');
-              }
-              ignore_onend = true;
-            }
-          };
-          recognition.onend = function() {
-            recognizing = false;
-            if (ignore_onend) {
-              return;
-            }
-            start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
-            // start_img.src = 'mic.gif';
-            if (!final_transcript) {
-              // showInfo ('info_start');
-              return;
-            }
-            // showInfo ('');
-            if (window.getSelection) {
-              window.getSelection().removeAllRanges();
-              var range = document.createRange();
-              range.selectNode(document.getElementById('search'));
-              window.getSelection().addRange(range);
-            }
-            if (create_email) {
-              create_email = false;
-              createEmail();
-            }
-          };
-          recognition.onresult = function(event) {
-            console.log(event);
-            var interim_transcript = '';
-            for (var i = event.resultIndex; i < event.results.length; ++i) {
-              if (event.results[i].isFinal) {
-                final_transcript = event.results[i][0].transcript;
-              } else {
-                interim_transcript += event.results[i][0].transcript;
-              }
-            }
-            final_transcript = capitalize(final_transcript);
-            search.value = linebreak(final_transcript);
-            search.focus()
-            start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
-            // interim_span.innerHTML = linebreak(interim_transcript);
-            if (final_transcript || interim_transcript) {
-              showButtons('inline-block');
-            }
-          };
+            var recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.onstart = function () {
+                recognizing = true;
+                // showInfo ('info_speak_now');
+                // mic change here
+                // start_img.src = 'mic-animate.gif';
+                console.log(start_img);
+                start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--red-600";
+            };
+            recognition.onerror = function (event) {
+                if (event.error == 'no-speech') {
+                    // start_img.src = 'mic.gif';
+                    start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                    // showInfo ('info_no_speech');
+                    ignore_onend = true;
+                }
+                if (event.error == 'audio-capture') {
+                    // start_img.src = 'mic.gif';
+                    start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                    // showInfo ('info_no_microphone');
+                    ignore_onend = true;
+                }
+                if (event.error == 'not-allowed') {
+                    if (event.timeStamp - start_timestamp < 100) {
+                        // showInfo ('info_blocked');
+                    } else {
+                        // showInfo ('info_denied');
+                    }
+                    ignore_onend = true;
+                }
+            };
+            recognition.onend = function () {
+                recognizing = false;
+                if (ignore_onend) {
+                    return;
+                }
+                start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                // start_img.src = 'mic.gif';
+                if (!final_transcript) {
+                    // showInfo ('info_start');
+                    return;
+                }
+                // showInfo ('');
+                if (window.getSelection) {
+                    window.getSelection().removeAllRanges();
+                    var range = document.createRange();
+                    range.selectNode(document.getElementById('search'));
+                    window.getSelection().addRange(range);
+                }
+                if (create_email) {
+                    create_email = false;
+                    createEmail();
+                }
+            };
+            recognition.onresult = function (event) {
+                console.log(event);
+                var interim_transcript = '';
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        final_transcript = event.results[i][0].transcript;
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                    }
+                }
+                final_transcript = capitalize(final_transcript);
+                search.value = linebreak(final_transcript);
+                search.focus()
+                start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                // interim_span.innerHTML = linebreak(interim_transcript);
+                if (final_transcript || interim_transcript) {
+                    showButtons('inline-block');
+                }
+            };
         }
         function upgrade() {
-          // showInfo ('info_upgrade');
+            // showInfo ('info_upgrade');
         }
         var two_line = /\n\n/g;
         var one_line = /\n/g;
         function linebreak(s) {
-          return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+            return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
         }
         var first_char = /\S/;
         function capitalize(s) {
-          return s.replace(first_char, function(m) { return m.toUpperCase(); });
+            return s.replace(first_char, function (m) {
+                return m.toUpperCase();
+            });
         }
         function createEmail() {
-          var n = final_transcript.indexOf('\n');
-          if (n < 0 || n >= 80) {
-            n = 40 + final_transcript.substring(40).indexOf(' ');
-          }
-          var subject = encodeURI(final_transcript.substring(0, n));
-          var body = encodeURI(final_transcript.substring(n + 1));
-          window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+            var n = final_transcript.indexOf('\n');
+            if (n < 0 || n >= 80) {
+                n = 40 + final_transcript.substring(40).indexOf(' ');
+            }
+            var subject = encodeURI(final_transcript.substring(0, n));
+            var body = encodeURI(final_transcript.substring(n + 1));
+            window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
         }
         function startButton(event) {
-          if (recognizing) {
-            recognition.stop();
-            return;
-          }
-          final_transcript = '';
-          recognition.lang = 'en-GB' //select_dialect.value;
-          recognition.start();
-          ignore_onend = false;
-          start_img.src = 'mic-slash.gif';
-          // showInfo ('info_allow');
-          showButtons('none');
-          start_timestamp = event.timeStamp;
+            if (recognizing) {
+                recognition.stop();
+                return;
+            }
+            final_transcript = '';
+            recognition.lang = 'en-GB' //select_dialect.value;
+            recognition.start();
+            ignore_onend = false;
+            start_img.src = 'mic-slash.gif';
+            // showInfo ('info_allow');
+            showButtons('none');
+            start_timestamp = event.timeStamp;
         }
         function showInfo(s) {
-          if (s) {
-            for (var child = info.firstChild; child; child = child.nextSibling) {
-              if (child.style) {
-                child.style.display = child.id == s ? 'inline' : 'none';
-              }
+            if (s) {
+                for (var child = info.firstChild; child; child = child.nextSibling) {
+                    if (child.style) {
+                        child.style.display = child.id == s ? 'inline' : 'none';
+                    }
+                }
+                info.style.visibility = 'visible';
+            } else {
+                info.style.visibility = 'hidden';
             }
-            info.style.visibility = 'visible';
-          } else {
-            info.style.visibility = 'hidden';
-          }
         }
         var current_style;
         function showButtons(style) {
-          if (style == current_style) {
-            return;
-          }
-          current_style = style;
+            if (style == current_style) {
+                return;
+            }
+            current_style = style;
         }
     </script>
 </div>
