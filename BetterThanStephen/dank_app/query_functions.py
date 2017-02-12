@@ -1,15 +1,17 @@
 from query_handling import loan
 
-amount_list = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+amount_list = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "1", "2", "3", "4", "5",
+               "6", "7", "8", "9", "10"]
 
 possible_keywords = {"question": ["when", "how"],
                      "time": ["next", "last"],
-                     "noun": ["payment", "payments", "owe"],
+                     "noun": ["payment", "payments", "owe", "loan", "loans"],
                      "amount": amount_list
-                    }
+                     }
+
 
 def find_keywords(result_string):
-    keywords = {"question" : [], "time" : [], "noun" : [], "amount" : []}
+    keywords = {"question": [], "time": [], "noun": [], "amount": []}
     split_result = result_string.split(" ")
 
     for word in split_result:
@@ -23,6 +25,8 @@ def find_keywords(result_string):
         elif word in possible_keywords["noun"]:
             if word == "payments":
                 keywords["noun"].append("payment")
+            elif word == "loans":
+                keywords["noun"].append("loan")
             else:
                 keywords["noun"].append(word)
         elif word in possible_keywords["amount"]:
@@ -34,7 +38,11 @@ def find_keywords(result_string):
 
     return keywords
 
+
 def query_db(user_p, keywords):
+    if ((len(keywords["question"]) == 0) or (len(keywords["time"]) == 0) or (len(keywords["noun"]) == 0) or (len(keywords["amount"]) == 0)):
+        return []
+
     question = keywords["question"][0]
     time = keywords["time"][0]
     noun = keywords["noun"][0]
