@@ -15,6 +15,7 @@ def populate():
                     username="bob",
                     password="bob",
                     email="bobby@bobby.com",
+                    crn=74747284848,
                     dob="1978-06-23")
     for i in xrange(1, 13):
         add_payment(user=user,
@@ -42,6 +43,7 @@ def populate():
                     username="jen",
                     password="jen",
                     email="jen@hotmail.com",
+                    crn=93828371023,
                     dob="1982-01-01")
 
     for i in xrange(1, 13, 3):
@@ -64,6 +66,7 @@ def populate():
                     username="jill",
                     password="jill",
                     email="jill@media.com",
+                    crn=18293255629,
                     dob="1956-09-01")
 
     for i in xrange(1, 13, 3):
@@ -83,11 +86,11 @@ def populate():
                 amount=1500)
 
 
-def add_user(name, username, password, email, dob, last_name="testuser", status="waiting payment"):
+def add_user(name, username, password, email, dob,crn, last_name="testuser", status="waiting payment"):
     user = User.objects.create_user(first_name=name, last_name=last_name,
                                     username=username, email=email,
                                     password=password)
-    u = UserProfile.objects.get_or_create(user_account=user, dateOfBirth=dob, status=status)[0]
+    u = UserProfile.objects.get_or_create(user_account=user, dateOfBirth=dob, status=status, crn=crn)[0]
     u.save()
     return u
 
