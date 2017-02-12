@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+       <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>Student Loans Company</title>
+
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="BetterThanStephen/static/images/android-desktop.png">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+        <link rel="apple-touch-icon-precomposed" href="BetterThanStephen/static/images/ios-desktop.png">
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#3372DF">
+
+        <link rel="shortcut icon" href="BetterThanStephen/static/images/favicon.png">
+
+        <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+        <!--
+        <link rel="canonical" href="http://www.example.com/">
+        -->
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-pink.min.css">
+        <link rel="stylesheet" href="BetterThanStephen/static/css/styles.css">
+        <style>
+        #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+        </style>
+
+</head>
+<body style="height: 100%">
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+        <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">Home</span>
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="search" name="query">
+                        <label class="mdl-textfield__label" for="search">Enter your query...</label>
+                    </div>
+                </div>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" onclick="startButton(event)" id="start_img">
+                    <i class="material-icons">microphone</i>
+                </button>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+                    <li class="mdl-menu__item">About</li>
+                    <li class="mdl-menu__item">Contact</li>
+                    <li class="mdl-menu__item">Legal information</li>
+                </ul>
+            </div>
+        </header>
+        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+            <header class="demo-drawer-header">
+                <img src="BetterThanStephen/static/images/user2.jpg" class="demo-avatar">
+                <br>
+                <div><small>CRN</small></div>
+                <div class="demo-avatar-dropdown">
+                    <span>74747284848</span>
+                    <!-- <span>memelord@dank.com</span> -->
+                    <div class="mdl-layout-spacer"></div>
+                    <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                        <i class="material-icons" role="presentation">arrow_drop_down</i>
+                        <span class="visuallyhidden">Accounts</span>
+                    </button>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+                        <li class="mdl-menu__item">funposter@dank.com</li>
+                        <li class="mdl-menu__item">hotpocket@dank.com</li>
+                        <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+                    </ul>
+                </div>
+            </header>
+            <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+                <!-- <a> <i>icon</i> link title </a> -->
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+                <a class="mdl-navigation__link" href="index2.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">search</i>Search</a>
+                <a class="mdl-navigation__link" href="faq.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help</i>FAQ</a>
+                <!-- <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
+                <div class="mdl-layout-spacer"></div>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a> -->
+            </nav>
+        </div>
+        <main class="mdl-layout__content mdl-color--grey-100">
+            <div class="mdl-grid demo-content">
+                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                    <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
+                        <use xlink:href="#piechart" mask="url(#piemask)" />
+                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan font-size="0.2" dy="-0.07">%</tspan></text>
+                    </svg>
+                    <!-- <div id="donut_single" style="width: 200px; height: 200px;"><div style="width: 50px; height: 50px;">memes</div></div> -->
+                    <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
+                        <use xlink:href="#piechart" mask="url(#piemask)" />
+                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
+                    </svg>
+                    <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
+                        <use xlink:href="#piechart" mask="url(#piemask)" />
+                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
+                    </svg>
+                    <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
+                        <use xlink:href="#piechart" mask="url(#piemask)" />
+                        <text x="0.5" y="0.5" font-family="Roboto" font-size="0.3" fill="#888" text-anchor="middle" dy="0.1">82<tspan dy="-0.07" font-size="0.2">%</tspan></text>
+                    </svg>
+                </div>
+                <!--<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+                    <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
+                        <use xlink:href="#chart" />
+                    </svg>
+                    <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
+                        <use xlink:href="#chart" />
+                    </svg>
+                </div>
+                <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+                    <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                        <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                            <h2 class="mdl-card__title-text">Updates</h2>
+                        </div>
+                        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                            Non dolore elit adipisicing ea reprehenderit consectetur culpa.
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Read More</a>
+                        </div>
+                    </div>
+                    <div class="demo-separator mdl-cell--1-col"></div>
+                    <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+                        <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+                            <h3>View options</h3>
+                            <ul>
+                                <li>
+                                    <label for="chkbox1" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                        <input type="checkbox" id="chkbox1" class="mdl-checkbox__input">
+                                        <span class="mdl-checkbox__label">Click per object</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label for="chkbox2" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                        <input type="checkbox" id="chkbox2" class="mdl-checkbox__input">
+                                        <span class="mdl-checkbox__label">Views per object</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label for="chkbox3" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                        <input type="checkbox" id="chkbox3" class="mdl-checkbox__input">
+                                        <span class="mdl-checkbox__label">Objects selected</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label for="chkbox4" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                        <input type="checkbox" id="chkbox4" class="mdl-checkbox__input">
+                                        <span class="mdl-checkbox__label">Objects viewed</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
+                            <div class="mdl-layout-spacer"></div>
+                            <i class="material-icons">location_on</i>
+                        </div>
+                    </div>
+                </div>-->
+                👌👀👌👀👌👀👌👀👌👀 good shit go౦ԁ sHit👌 thats ✔ some good👌👌shit right👌👌there👌👌👌 right✔there ✔✔if i do ƽaү so my self 💯 i say so 💯 thats what im talking about right there right there (chorus: ʳᶦᵍʰᵗ ᵗʰᵉʳᵉ) mMMMMᎷМ💯 👌👌 👌НO0ОଠOOOOOОଠଠOoooᵒᵒᵒᵒᵒᵒᵒᵒᵒ👌 👌👌 👌 💯 👌 👀 👀 👀 👌👌Good shit
+
+                <style>
+                  * {
+                    font-family: Verdana, Arial, sans-serif;
+                  }
+                  a:link {
+                    color:#000;
+                    text-decoration: none;
+                  }
+                  a:visited {
+                    color:#000;
+                  }
+                  a:hover {
+                    color:#33F;
+                  }
+                  .button {
+                    background: -webkit-linear-gradient(top,#008dfd 0,#0370ea 100%);
+                    border: 1px solid #076bd2;
+                    border-radius: 3px;
+                    color: #fff;
+                    display: none;
+                    font-size: 13px;
+                    font-weight: bold;
+                    line-height: 1.3;
+                    padding: 8px 25px;
+                    text-align: center;
+                    text-shadow: 1px 1px 1px #076bd2;
+                    letter-spacing: normal;
+                  }
+                  .center {
+                    padding: 10px;
+                    text-align: center;
+                  }
+                  .final {
+                    color: black;
+                    padding-right: 3px; 
+                  }
+                  .interim {
+                    color: gray;
+                  }
+                  .info {
+                    font-size: 14px;
+                    text-align: center;
+                    color: #777;
+                    display: none;
+                  }
+                  .right {
+                    float: right;
+                  }
+                  .sidebyside {
+                    display: inline-block;
+                    width: 45%;
+                    min-height: 40px;
+                    text-align: left;
+                    vertical-align: top;
+                  }
+                  #headline {
+                    font-size: 40px;
+                    font-weight: 300;
+                  }
+                  #info {
+                    font-size: 20px;
+                    text-align: center;
+                    color: #777;
+                    visibility: hidden;
+                  }
+                  #results {
+                    font-size: 14px;
+                    font-weight: bold;
+                    border: 1px solid #ddd;
+                    padding: 15px;
+                    text-align: left;
+                    min-height: 150px;
+                  }
+                  #start_button {
+                    border: 0;
+                    background-color:transparent;
+                    padding: 0;
+                  }
+                </style>
+
+                <div id="speech_recog">
+                    <div id="info">
+                        <p id="info_start">Click on the microphone icon and begin speaking.</p>
+                        <p id="info_speak_now">Speak now.</p>
+                        <p id="info_no_speech">No speech was detected. You may need to adjust your
+                            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                                microphone settings</a>.</p>
+                        <p id="info_no_microphone" style="display:none">
+                            No microphone was found. Ensure that a microphone is installed and that
+                            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                            microphone settings</a> are configured correctly.</p>
+                        <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+                        <p id="info_denied">Permission to use microphone was denied.</p>
+                        <p id="info_blocked">Permission to use microphone is blocked. To change,
+                            go to chrome://settings/contentExceptions#media-stream</p>
+                        <p id="info_upgrade">Web Speech API is not supported by this browser.
+                             Upgrade to <a href="//www.google.com/chrome">Chrome</a>
+                             version 25 or later.</p>
+                    </div>
+                    <div class="right">
+                        <button id="start_button" onclick="startButton(event)">
+                            <img id="start_immg" src="BetterThanStephen/static/images/mic.gif" alt="Start"></button>
+                    </div>
+                    <div id="results">
+                        <span id="final_span" class="final"></span>
+                        <!-- <span id="interim_span" class="interim"></span> -->
+                        <p>
+                    </div>
+                    <div class="center">
+                        <div class="sidebyside" style="text-align:right">
+                            <button id="copy_button" class="button" onclick="copyButton()">
+                                Copy and Paste</button>
+                            <div id="copy_info" class="info">
+                                Press Control-C to copy text.<br>(Command-C on Mac.)
+                            </div>
+                        </div>
+                        <div class="sidebyside">
+                            <button id="email_button" class="button" onclick="emailButton()">
+                                Create Email</button>
+                            <div id="email_info" class="info">
+                                Text sent to default email application.<br>
+                                (See chrome://settings/handlers to change.)
+                            </div>
+                        </div>
+                        <p>
+                        <div id="div_language">
+                            <select id="select_language" onchange="updateCountry()"></select>
+                            &nbsp;&nbsp;
+                            <select id="select_dialect"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </main>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
+            <defs>
+                <mask id="piemask" maskContentUnits="objectBoundingBox">
+                    <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
+                    <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
+                </mask>
+                <g id="piechart">
+                    <circle cx=0.5 cy=0.5 r=0.5 />
+                    <!-- grey bit showing unused space -->
+                    <path d="M 0.5 0.5 0.5 0
+                             A 0.5 0.5 0 0 1 1 0.5
+
+                             z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
+                </g>
+            </defs>
+        </svg>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 250" style="position: fixed; left: -1000px; height: -1000px;">
+            <defs>
+                <g id="chart">
+                    <g id="Gridlines">
+                        <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="27.3" x2="468.3" y2="27.3" />
+                        <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="66.7" x2="468.3" y2="66.7" />
+                        <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="105.3" x2="468.3" y2="105.3" />
+                        <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="144.7" x2="468.3" y2="144.7" />
+                        <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="184.3" x2="468.3" y2="184.3" />
+                    </g>
+                    <g id="Numbers">
+                        <text transform="matrix(1 0 0 1 485 29.3333)" fill="#888888" font-family="'Roboto'" font-size="9">500</text>
+                        <text transform="matrix(1 0 0 1 485 69)" fill="#888888" font-family="'Roboto'" font-size="9">400</text>
+                        <text transform="matrix(1 0 0 1 485 109.3333)" fill="#888888" font-family="'Roboto'" font-size="9">300</text>
+                        <text transform="matrix(1 0 0 1 485 149)" fill="#888888" font-family="'Roboto'" font-size="9">200</text>
+                        <text transform="matrix(1 0 0 1 485 188.3333)" fill="#888888" font-family="'Roboto'" font-size="9">100</text>
+                        <text transform="matrix(1 0 0 1 0 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">1</text>
+                        <text transform="matrix(1 0 0 1 78 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">2</text>
+                        <text transform="matrix(1 0 0 1 154.6667 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">3</text>
+                        <text transform="matrix(1 0 0 1 232.1667 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">4</text>
+                        <text transform="matrix(1 0 0 1 309 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">5</text>
+                        <text transform="matrix(1 0 0 1 386.6667 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">6</text>
+                        <text transform="matrix(1 0 0 1 464.3333 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">7</text>
+                    </g>
+                    <g id="Layer_5">
+                        <polygon opacity="0.36" stroke-miterlimit="10" points="0,223.3 48,138.5 154.7,169 211,88.5
+                        294.5,80.5 380,165.2 437,75.5 469.5,223.3   "/>
+                    </g>
+                    <g id="Layer_4">
+                        <polygon stroke-miterlimit="10" points="469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7
+                        296.7,128 380.7,184.3 436.7,125     "/>
+                    </g>
+                </g>
+            </defs>
+        </svg>
+        <!--<a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/dashboard/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>-->
+        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script>
+            var langs =
+            [['Afrikaans',       ['af-ZA']],
+             ['Bahasa Indonesia',['id-ID']],
+             ['Bahasa Melayu',   ['ms-MY']],
+             ['Català',          ['ca-ES']],
+             ['Čeština',         ['cs-CZ']],
+             ['Deutsch',         ['de-DE']],
+             ['English',         ['en-AU', 'Australia'],
+                                 ['en-CA', 'Canada'],
+                                 ['en-IN', 'India'],
+                                 ['en-NZ', 'New Zealand'],
+                                 ['en-ZA', 'South Africa'],
+                                 ['en-GB', 'United Kingdom'],
+                                 ['en-US', 'United States']],
+             ['Español',         ['es-AR', 'Argentina'],
+                                 ['es-BO', 'Bolivia'],
+                                 ['es-CL', 'Chile'],
+                                 ['es-CO', 'Colombia'],
+                                 ['es-CR', 'Costa Rica'],
+                                 ['es-EC', 'Ecuador'],
+                                 ['es-SV', 'El Salvador'],
+                                 ['es-ES', 'España'],
+                                 ['es-US', 'Estados Unidos'],
+                                 ['es-GT', 'Guatemala'],
+                                 ['es-HN', 'Honduras'],
+                                 ['es-MX', 'México'],
+                                 ['es-NI', 'Nicaragua'],
+                                 ['es-PA', 'Panamá'],
+                                 ['es-PY', 'Paraguay'],
+                                 ['es-PE', 'Perú'],
+                                 ['es-PR', 'Puerto Rico'],
+                                 ['es-DO', 'República Dominicana'],
+                                 ['es-UY', 'Uruguay'],
+                                 ['es-VE', 'Venezuela']],
+             ['Euskara',         ['eu-ES']],
+             ['Français',        ['fr-FR']],
+             ['Galego',          ['gl-ES']],
+             ['Hrvatski',        ['hr_HR']],
+             ['IsiZulu',         ['zu-ZA']],
+             ['Íslenska',        ['is-IS']],
+             ['Italiano',        ['it-IT', 'Italia'],
+                                 ['it-CH', 'Svizzera']],
+             ['Magyar',          ['hu-HU']],
+             ['Nederlands',      ['nl-NL']],
+             ['Norsk bokmål',    ['nb-NO']],
+             ['Polski',          ['pl-PL']],
+             ['Português',       ['pt-BR', 'Brasil'],
+                                 ['pt-PT', 'Portugal']],
+             ['Română',          ['ro-RO']],
+             ['Slovenčina',      ['sk-SK']],
+             ['Suomi',           ['fi-FI']],
+             ['Svenska',         ['sv-SE']],
+             ['Türkçe',          ['tr-TR']],
+             ['български',       ['bg-BG']],
+             ['Pусский',         ['ru-RU']],
+             ['Српски',          ['sr-RS']],
+             ['한국어',            ['ko-KR']],
+             ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
+                                 ['cmn-Hans-HK', '普通话 (香港)'],
+                                 ['cmn-Hant-TW', '中文 (台灣)'],
+                                 ['yue-Hant-HK', '粵語 (香港)']],
+             ['日本語',           ['ja-JP']],
+             ['Lingua latīna',   ['la']]];
+            for (var i = 0; i < langs.length; i++) {
+              select_language.options[i] = new Option(langs[i][0], i);
+            }
+            select_language.selectedIndex = 6;
+            updateCountry();
+            select_dialect.selectedIndex = 6;
+            showInfo('info_start');
+            function updateCountry() {
+              for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+                select_dialect.remove(i);
+              }
+              var list = langs[select_language.selectedIndex];
+              for (var i = 1; i < list.length; i++) {
+                select_dialect.options.add(new Option(list[i][1], list[i][0]));
+              }
+              select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+            }
+            var create_email = false;
+            var final_transcript = '';
+            var recognizing = false;
+            var ignore_onend;
+            var start_timestamp;
+            if (!('webkitSpeechRecognition' in window)) {
+              upgrade();
+            } else {
+              start_button.style.display = 'inline-block';
+              var recognition = new webkitSpeechRecognition();
+              recognition.continuous = true;
+              recognition.interimResults = true;
+              recognition.onstart = function() {
+                recognizing = true;
+                showInfo('info_speak_now');
+                // mic change here
+                // start_img.src = 'mic-animate.gif';
+                console.log(start_img);
+                start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color-text--red-600";
+              };
+              recognition.onerror = function(event) {
+                if (event.error == 'no-speech') {
+                  // start_img.src = 'mic.gif';
+                  start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                  showInfo('info_no_speech');
+                  ignore_onend = true;
+                }
+                if (event.error == 'audio-capture') {
+                  // start_img.src = 'mic.gif';
+                  start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                  showInfo('info_no_microphone');
+                  ignore_onend = true;
+                }
+                if (event.error == 'not-allowed') {
+                  if (event.timeStamp - start_timestamp < 100) {
+                    showInfo('info_blocked');
+                  } else {
+                    showInfo('info_denied');
+                  }
+                  ignore_onend = true;
+                }
+              };
+              recognition.onend = function() {
+                recognizing = false;
+                if (ignore_onend) {
+                  return;
+                }
+                start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                // start_img.src = 'mic.gif';
+                if (!final_transcript) {
+                  showInfo('info_start');
+                  return;
+                }
+                showInfo('');
+                if (window.getSelection) {
+                  window.getSelection().removeAllRanges();
+                  var range = document.createRange();
+                  range.selectNode(document.getElementById('search'));
+                  window.getSelection().addRange(range);
+                }
+                if (create_email) {
+                  create_email = false;
+                  createEmail();
+                }
+              };
+              recognition.onresult = function(event) {
+                console.log(event);
+                var interim_transcript = '';
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                  if (event.results[i].isFinal) {
+                    final_transcript = event.results[i][0].transcript;
+                  } else {
+                    interim_transcript += event.results[i][0].transcript;
+                  }
+                }
+                final_transcript = capitalize(final_transcript);
+                search.value = linebreak(final_transcript);
+                search.focus()
+                start_img.className = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon";
+                // interim_span.innerHTML = linebreak(interim_transcript);
+                if (final_transcript || interim_transcript) {
+                  showButtons('inline-block');
+                }
+              };
+            }
+            function upgrade() {
+              start_button.style.visibility = 'hidden';
+              showInfo('info_upgrade');
+            }
+            var two_line = /\n\n/g;
+            var one_line = /\n/g;
+            function linebreak(s) {
+              return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+            }
+            var first_char = /\S/;
+            function capitalize(s) {
+              return s.replace(first_char, function(m) { return m.toUpperCase(); });
+            }
+            function createEmail() {
+              var n = final_transcript.indexOf('\n');
+              if (n < 0 || n >= 80) {
+                n = 40 + final_transcript.substring(40).indexOf(' ');
+              }
+              var subject = encodeURI(final_transcript.substring(0, n));
+              var body = encodeURI(final_transcript.substring(n + 1));
+              window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+            }
+            function copyButton() {
+              if (recognizing) {
+                recognizing = false;
+                recognition.stop();
+              }
+              copy_button.style.display = 'none';
+              copy_info.style.display = 'inline-block';
+              showInfo('');
+            }
+            function emailButton() {
+              if (recognizing) {
+                create_email = true;
+                recognizing = false;
+                recognition.stop();
+              } else {
+                createEmail();
+              }
+              email_button.style.display = 'none';
+              email_info.style.display = 'inline-block';
+              showInfo('');
+            }
+            function startButton(event) {
+              if (recognizing) {
+                recognition.stop();
+                return;
+              }
+              final_transcript = '';
+              recognition.lang = select_dialect.value;
+              recognition.start();
+              ignore_onend = false;
+              final_span.innerHTML = '';
+              // interim_span.innerHTML = '';
+              start_img.src = 'mic-slash.gif';
+              showInfo('info_allow');
+              showButtons('none');
+              start_timestamp = event.timeStamp;
+            }
+            function showInfo(s) {
+              if (s) {
+                for (var child = info.firstChild; child; child = child.nextSibling) {
+                  if (child.style) {
+                    child.style.display = child.id == s ? 'inline' : 'none';
+                  }
+                }
+                info.style.visibility = 'visible';
+              } else {
+                info.style.visibility = 'hidden';
+              }
+            }
+            var current_style;
+            function showButtons(style) {
+              if (style == current_style) {
+                return;
+              }
+              current_style = style;
+              copy_button.style.display = style;
+              email_button.style.display = style;
+              copy_info.style.display = 'none';
+              email_info.style.display = 'none';
+            }
+        </script>
+    </div>
+
+
+
+
+</body>
+</html>
